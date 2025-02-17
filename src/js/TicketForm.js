@@ -8,7 +8,7 @@ export default class TicketForm {
 
   static get markup() {
     return `
-    <form class="add-ticket-form" action="" method="get">
+    <form class="add-ticket-form" method="POST" action="http://localhost:7070">
         <h1 class="form-header">Добавить тикет</h1>
         <div class="short-description description">
           <label for="shortDescription">Краткое описание</label>
