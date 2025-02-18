@@ -11,7 +11,7 @@ body {
     display: flex;
     width: 95vw;
     height: 100vh;
-    margin: auto 2.5vw;
+    margin: 10vh 2.5vw;
     flex-direction: column;
     justify-content: center;
 }

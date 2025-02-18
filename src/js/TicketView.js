@@ -62,9 +62,10 @@ export default class TicketView {
   }
 
   bindToDOM() {
-    this.parentElement.innerHTML = TicketView.markup();
+    this.parentElement.innerHTML = TicketView.markup;
 
     this.ticketEl = this.parentElement.querySelector(TicketView.ticket);
+    this.ticketEl.dataset.id = id;
     this.radioAndDescriptionEl = this.ticketEl.querySelector(TicketView.radioAndDescription);
     this.checkboxEl = this.radioAndDescriptionEl.querySelector(TicketView.checkbox);
     this.descriptionEl = this.radioAndDescriptionEl.querySelector(TicketView.description);
