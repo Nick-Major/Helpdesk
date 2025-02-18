@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
     font-size: 16px;
-    font-weight: 600;
     color: #888787f8;
     margin: 0;
     padding: 0;
@@ -16,11 +15,13 @@ body {
     justify-content: center;
 }
 
-.add-ticket-form {
+.form {
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     width: 55vw;
-    padding: 20px;
+    min-width: 150px;
+    padding: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -30,7 +31,10 @@ body {
 }
 
 .form-header {
+    font-size: inherit;
+    font-weight: inherit;
     text-align: center;
+    margin: 0;
 }
 
 .description {
@@ -61,6 +65,7 @@ textarea[name="ticketDescription"]:focus {
     border: 1px solid #888787f8;
     color: #888787f8;
     cursor: pointer;
+    font-size: inherit;
 }
 
 .btns-container {
@@ -126,4 +131,8 @@ textarea[name="ticketDescription"]:focus {
     text-align: center;
     font-size: 0.5em;
     padding: 5px;
+}
+
+.operation-description {
+    text-align: center;
 }

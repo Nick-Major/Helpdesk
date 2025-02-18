@@ -11,9 +11,9 @@ const root = document.getElementById('root');
 
 // УЖЕ БЫЛО!!!
 
-const ticketInstance = new TicketView(root);
+// const ticketInstance = new TicketView(root);
 
-ticketInstance.bindToDOM();
+// ticketInstance.bindToDOM();
 
 
 // document.addEventListener('DOMContentLoaded', () => {

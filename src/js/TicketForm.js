@@ -8,7 +8,7 @@ export default class TicketForm {
 
   static get markup() {
     return `
-    <form class="add-ticket-form" method="POST" action="http://localhost:7070">
+    <form class="add-ticket-form form" method="POST" action="http://localhost:7070">
         <h1 class="form-header">Добавить тикет</h1>
         <div class="short-description description">
           <label for="shortDescription">Краткое описание</label>
@@ -26,8 +26,8 @@ export default class TicketForm {
     `
   }
 
-  static get addTicketForm() {
-    return '.add-ticket-form';
+  static get form() {
+    return '.form';
   }
 
   static get formHeader() {
@@ -57,7 +57,7 @@ export default class TicketForm {
   bindToDOM() {
     this.container.innerHTML = TicketForm.markup();
 
-    this.form = this.container.querySelector(TicketForm.addTicketForm);
+    this.form = this.container.querySelector(TicketForm.form);
     this.header = this.form.querySelector(TicketForm.formHeader);
     this.shortDes = this.form.querySelector(TicketForm.shortDescription);
     this.detailedDes = this.form.querySelector(TicketForm.detailedDescription);
