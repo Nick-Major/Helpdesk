@@ -1,12 +1,6 @@
 const createRequest = async ({ url, method, data}) => {
     const xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState !== 4) return;
-
-        console.log(xhr.responseText);
-    };
-
     xhr.open(method, url);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -17,6 +11,12 @@ const createRequest = async ({ url, method, data}) => {
         xhr.send(data);
     } else {
         xhr.send();
+    };
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState !== 4) return;
+
+        console.log(xhr.responseText);
     };
 
     xhr.onload = function() {

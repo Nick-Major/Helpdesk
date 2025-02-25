@@ -3,77 +3,62 @@
  *  Он содержит методы для генерации разметки тикета.
  * */
 export default class TicketView {
-  constructor(parentElement) {
-    this.parentElement = parentElement;
-  }
 
-  static get markup() {
-    return `
-    <div class="ticket">
-        <div class="radio-and-description">
-          <div class="checkbox ticketBtn"></div>
-          <p class="task-description">Поменять краску в принтере, ком. 404</p>
-        </div>
-        <div class="time-and-btns">
-          <time class="time" datetime="YYYY-MM-DDThh:mm">10.03.19 08:40</time>
-          <div class="ticket-btns-container">
+  render(ticket) {
+    const ticketList = document.querySelector('.ticket-list');
+    this.ticketEl = document.createElement('div');
+
+    this.ticketEl.className = 'ticket';
+    this.ticketEl.dataset.id = ticket.id;
+
+    this.ticketEl.innerHTML = `
+    <div class="radio-and-description">
+        <div class="checkbox ticketBtn ${ticket.status ? 'done' : ''}"></div>
+        <h1 class="ticket-title">${ticket.name}</h1>
+    </div>
+    <div class="time-and-btns">
+        <time class="time" datetime="YYYY-MM-DDThh:mm">${ticket.created}</time>
+        <div class="ticket-btns-container">
             <div class="correct-ticket ticketBtn"></div>
             <div class="delete-ticket ticketBtn">X</div>
-          </div>
         </div>
-      </div>
+    </div>
+    <p class="task-description hidden">${ticket.description}</p>
     `
+    ticketList.append(ticketEl);
+
+    this.addEventListeners();
   }
 
-  static get ticket() {
-    return '.ticket';
-  }
+  addEventListeners() {
+    const checkbox = this.ticketEl.querySelector('.checkbox');
+    const changeTicketBtn = this.ticketEl.querySelector('.correct-ticket');
+    const deleteTicketBtn = this.ticketEl.querySelector('.delete-ticket');
+    const taskDescription = this.ticketEl.querySelector('.task-description');
 
-  static get radioAndDescription() {
-    return '.radio-and-description';
-  }
+    checkbox.addEventListener('click', ()=> {
+      checkbox.classList.toggle('done');
+    });
 
-  static get checkbox() {
-    return '.checkbox';
-  }
+    changeTicketBtn.addEventListener('click', ()=> {
+      //должен вызывать форму изменения тикета
+    });
 
-  static get description() {
-    return '.task-description';
-  }
+    deleteTicketBtn.addEventListener('click', ()=> {
+      //должен вызывать форму удаления тикета
+    });
 
-  static get timeAndBtns() {
-    return '.time-and-btns';
-  }
+    this.ticketEl.addEventListener('click', (e)=> {
+      const isTicketBtn = e.target.classList.contains('ticketBtn');
 
-  static get time() {
-    return '.time';
-  }
+      if (isTicketBtn) { return };
 
-  static get ticketBtnsContainer() {
-    return '.ticket-btns-container';
-  }
-
-  static get correctTicket() {
-    return '.correct-ticket';
-  }
-
-  static get deleteTicket() {
-    return '.delete-ticket';
-  }
-
-  bindToDOM() {
-    this.parentElement.innerHTML = TicketView.markup;
-
-    this.ticketEl = this.parentElement.querySelector(TicketView.ticket);
-    this.ticketEl.dataset.id = id;
-    this.radioAndDescriptionEl = this.ticketEl.querySelector(TicketView.radioAndDescription);
-    this.checkboxEl = this.radioAndDescriptionEl.querySelector(TicketView.checkbox);
-    this.descriptionEl = this.radioAndDescriptionEl.querySelector(TicketView.description);
-    this.timeAndBtnsEl = this.ticketEl.querySelector(TicketView.timeAndBtns);
-    this.timeEl = this.timeAndBtnsEl.querySelector(TicketView.time);
-    this.ticketBtnsContainerEl = this.timeAndBtnsEl.querySelector(TicketView.ticketBtnsContainer);
-    this.correctTicketEl = this.ticketBtnsContainerEl.querySelector(TicketView.correctTicket);
-    this.deleteTicketEl = this.ticketBtnsContainerEl.querySelector(TicketView.deleteTicket);
+      if (taskDescription.classList.contains('hidden')) {
+        taskDescription.classList.remove('hidden');
+      } else {
+        taskDescription.classList.add('hidden');
+      };
+    })
   }
 
 }

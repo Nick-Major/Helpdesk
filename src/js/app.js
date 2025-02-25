@@ -1,96 +1,56 @@
+import { Date } from 'core-js';
 import HelpDesk from './HelpDesk';
 import TicketService from './TicketService';
 import TicketView from './TicketView';
 
 const root = document.getElementById('root');
 
-const controlPanel = document.createElement('div');
-controlPanel.classList.add('control-panel');
-
-const dotsContainer = document.createElement('div');
-dotsContainer.classList.add('dots-container');
-
-for(let i = 0; i < 3; i++) {
-    const newEl = document.createElement('span');
-    newEl.classList.add('dot');
-    dotsContainer.appendChild(newEl);
+const data = {
+    id: '1988',
+    name: 'Поменять краску в принтере, ком. 404',
+    description: 'Принтер HP LJ 1210, картриджи на складе',
+    status: true,
+    created: '10.03.19 08:40',
 }
 
-controlPanel.appendChild(dotsContainer);
+const ticketEl = document.createElement('div');
 
-const addBtnContainer = document.createElement('div');
-addBtnContainer.classList.add('add-btn-container');
+ticketEl.className = 'ticket';
 
-const addTicketBtn = document.createElement('button');
-addTicketBtn.classList.add('add-ticket-btn', 'btn');
-addTicketBtn.textContent = 'Добавить тикет';
+ticketEl.dataset.id = data.id;
 
-addBtnContainer.appendChild(addTicketBtn);
+ticketEl.innerHTML = `
+    <div class="radio-and-description">
+        <div class="checkbox ticketBtn ${data.status ? 'done' : ''}"></div>
+        <h1 class="ticket-title">${data.name}</h1>
+    </div>
+    <div class="time-and-btns">
+        <time class="time" datetime="YYYY-MM-DDThh:mm">${data.created}</time>
+        <div class="ticket-btns-container">
+            <div class="correct-ticket ticketBtn"></div>
+            <div class="delete-ticket ticketBtn">X</div>
+        </div>
+    </div>
+    <p class="task-description hidden">${data.description}</p>
+`
 
-controlPanel.appendChild(addBtnContainer);
+root.append(ticketEl);
 
-const ticketList = document.createElement('div');
-ticketList.classList.add('ticket-list');
+const checkbox = ticketEl.querySelector('.checkbox');
+const taskDescription = ticketEl.querySelector('.task-description');
 
-controlPanel.appendChild(ticketList);
+checkbox.addEventListener('click', ()=> {
+    checkbox.classList.toggle('done');
+})
 
-root.append(controlPanel);
+ticketEl.addEventListener('click', (e)=> {
+    const isTicketBtn = e.target.classList.contains('ticketBtn');
+    
+    if (isTicketBtn) { return };
 
-
-// const body = document.querySelector('body');
-
-// const controlPanel = document.createElement('div');
-// controlPanel.classList.add('control-panel');
-
-// const dotsContainer = document.createElement('div');
-// dotsContainer.classList.add('dots-container');
-
-// for(let i = 0; i < 3; i++) {
-//     const newEl = document.createElement('span');
-//     newEl.classList.add('dot');
-//     dotsContainer.appendChild(newEl);
-// }
-
-// controlPanel.appendChild(dotsContainer);
-
-// const addBtnContainer = document.createElement('div');
-// addBtnContainer.classList.add('add-btn-container');
-
-// const addTicketBtn = document.createElement('button');
-// addTicketBtn.classList.add('add-ticket-btn', 'btn');
-// addTicketBtn.textContent = 'Добавить тикет';
-
-// addBtnContainer.appendChild(addTicketBtn);
-
-// controlPanel.appendChild(addBtnContainer);
-
-// body.insertBefore(controlPanel, root);
-
-
-
-// const ticketService = new TicketService();
-
-// const app = new HelpDesk(root, ticketService);
-
-// app.init();
-
-// УЖЕ БЫЛО!!!
-
-// const ticketInstance = new TicketView(root);
-
-// ticketInstance.bindToDOM();
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const xhr = new XMLHttpRequest();
-
-//     xhr.onreadystatechange = function () {
-//         if(xhr.readyState !== 4) return;
-
-//         console.log(xhr.responseText);
-//     }
-
-//     xhr.open('GET', 'http://localhost:7070');
-
-//     xhr.send();
-// })
+    if(taskDescription.classList.contains('hidden')) {
+        taskDescription.classList.remove('hidden');
+    } else {
+        taskDescription.classList.add('hidden');
+    };
+})

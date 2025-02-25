@@ -2,8 +2,9 @@
  *  Класс для создания формы создания нового тикета
  * */
 export default class TicketForm {
-  constructor(container) {
-    this.container = container;
+  constructor() {
+    this.container = null;
+    this.modal = null;
   }
 
   static get markup() {
@@ -24,46 +25,6 @@ export default class TicketForm {
         </div>
       </form>
     `
-  }
-
-  static get form() {
-    return '.form';
-  }
-
-  static get formHeader() {
-    return '.form-header';
-  }
-
-  static get shortDescription() {
-    return '.short-description description';
-  }
-
-  static get detailedDescription() {
-    return '.detailed-description description';
-  }
-
-  static get btnsContainer() {
-    return '.btns-container';
-  }
-
-  static get cancelBtn() {
-    return '.cancel-btn btn';
-  }
-
-  static get confirmBtn() {
-    return '.confirm-btn btn';
-  }
-
-  bindToDOM() {
-    this.container.innerHTML = TicketForm.markup();
-
-    this.form = this.container.querySelector(TicketForm.form);
-    this.header = this.form.querySelector(TicketForm.formHeader);
-    this.shortDes = this.form.querySelector(TicketForm.shortDescription);
-    this.detailedDes = this.form.querySelector(TicketForm.detailedDescription);
-    this.btns = this.form.querySelector(TicketForm.btnsContainer);
-    this.btnCancel = this.btns.querySelector(TicketForm.cancelBtn);
-    this.btnConfirm = this.btns.querySelector(TicketForm.confirmBtn);
   }
 
 }
