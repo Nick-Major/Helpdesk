@@ -1,30 +1,29 @@
-const createRequest = async ({ url, method, data}) => {
-    const xhr = new XMLHttpRequest();
+const createRequest = async ({ url, method, data }) => {
+  const xhr = new XMLHttpRequest();
 
-    xhr.open(method, url);
+  xhr.open(method, url);
 
-    xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.setRequestHeader('Content-Type', 'application/json');
 
-    xhr.responseType = 'json';
+  xhr.responseType = 'json';
 
-    if (data) {
-        xhr.send(data);
-    } else {
-        xhr.send();
-    };
+  if (data) {
+    xhr.send(data);
+  } else {
+    xhr.send();
+  }
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState !== 4) return;
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState !== 4) return;
 
-        console.log(xhr.responseText);
-    };
+    console.log(xhr.responseText);
+  };
 
-    xhr.onload = function() {
-        if (xhr.status != 200) {
-            console.log('Error: ' + xhr.status);
-        };
-    };
-
+  xhr.onload = function () {
+    if (xhr.status !== 200) {
+      console.log(`Error: ${xhr.status}`);
+    }
+  };
 };
 
 export default createRequest;

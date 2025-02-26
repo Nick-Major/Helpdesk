@@ -1,7 +1,7 @@
-import express from "express";
-import cors from "cors";
-import bodyParser from "body-parser";
-import * as crypto from "crypto";
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import * as crypto from 'crypto';
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
 
@@ -14,7 +14,7 @@ app.use(
     type(req) {
       return true;
     },
-  })
+  }),
 );
 app.use((req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
@@ -24,22 +24,22 @@ app.use((req, res, next) => {
 let tickets = [
   {
     id: crypto.randomUUID(),
-    name: "Поменять краску в принтере, ком. 404",
-    description: "Принтер HP LJ-1210, картриджи на складе",
+    name: 'Поменять краску в принтере, ком. 404',
+    description: 'Принтер HP LJ-1210, картриджи на складе',
     status: false,
     created: Date.now(),
   },
   {
     id: crypto.randomUUID(),
-    name: "Переустановить Windows, PC-Hall24",
-    description: "",
+    name: 'Переустановить Windows, PC-Hall24',
+    description: '',
     status: false,
     created: Date.now(),
   },
   {
     id: crypto.randomUUID(),
-    name: "Установить обновление KB-31642dv3875",
-    description: "Вышло критическое обновление для Windows",
+    name: 'Установить обновление KB-31642dv3875',
+    description: 'Вышло критическое обновление для Windows',
     status: false,
     created: Date.now(),
   },
@@ -48,30 +48,30 @@ let tickets = [
 app.use(async (request, response) => {
   const { method, id } = request.query;
   switch (method) {
-    case "allTickets":
+    case 'allTickets':
       logger.info('All tickets has been called');
       response.send(JSON.stringify(tickets)).end();
       break;
-    case "ticketById": {
+    case 'ticketById': {
       const ticket = tickets.find((ticket) => ticket.id === id);
       if (!ticket) {
         response
           .status(404)
-          .send(JSON.stringify({ message: "Ticket not found" }))
+          .send(JSON.stringify({ message: 'Ticket not found' }))
           .end();
         break;
       }
       response.send(JSON.stringify(ticket)).end();
       break;
     }
-    case "createTicket": {
+    case 'createTicket': {
       try {
         const createData = request.body;
         const newTicket = {
           id: crypto.randomUUID(),
           name: createData.name,
           status: false,
-          description: createData.description || "",
+          description: createData.description || '',
           created: Date.now(),
         };
         tickets.push(newTicket);
@@ -83,7 +83,7 @@ app.use(async (request, response) => {
       }
       break;
     }
-    case "deleteById": {
+    case 'deleteById': {
       const ticket = tickets.find((ticket) => ticket.id === id);
       if (ticket) {
         tickets = tickets.filter((ticket) => ticket.id !== id);
@@ -93,12 +93,12 @@ app.use(async (request, response) => {
         logger.warn(`Ticket not found: ${id}`);
         response
           .status(404)
-          .send(JSON.stringify({ message: "Ticket not found" }))
+          .send(JSON.stringify({ message: 'Ticket not found' }))
           .end();
       }
       break;
     }
-    case "updateById": {
+    case 'updateById': {
       const ticket = tickets.find((ticket) => ticket.id === id);
       const updateData = request.body;
       if (ticket) {
@@ -109,7 +109,7 @@ app.use(async (request, response) => {
         logger.warn(`Ticket not found: ${id}`);
         response
           .status(404)
-          .send(JSON.stringify({ message: "Ticket not found" }))
+          .send(JSON.stringify({ message: 'Ticket not found' }))
           .end();
       }
       break;
@@ -125,9 +125,7 @@ const port = process.env.PORT || 7070;
 
 const bootstrap = async () => {
   try {
-    app.listen(port, () =>
-        logger.info(`Server has been started on http://localhost:${port}`)
-    );
+    app.listen(port, () => logger.info(`Server has been started on http://localhost:${port}`));
   } catch (error) {
     console.error(error);
   }

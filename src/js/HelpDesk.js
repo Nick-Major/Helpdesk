@@ -28,7 +28,7 @@ export default class HelpDesk {
     const dotsContainer = document.createElement('div');
     dotsContainer.classList.add('dots-container');
 
-    for(let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
       const newEl = document.createElement('span');
       newEl.classList.add('dot');
       dotsContainer.appendChild(newEl);
@@ -54,5 +54,4 @@ export default class HelpDesk {
 
     this.container.append(controlPanel);
   }
-
 }
