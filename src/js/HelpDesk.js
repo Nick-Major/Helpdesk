@@ -1,6 +1,5 @@
-/**
- *  Основной класс приложения
- * */
+//Основной класс приложения
+
 export default class HelpDesk {
   constructor(container, ticketService, ticketView, ticketForm, deleteTicketForm) {
     if (!(container instanceof HTMLElement)) {
@@ -17,7 +16,6 @@ export default class HelpDesk {
   init() {
     this.addControlPanel();
     this.loadTickets();
-    this.render();
     this.addEventListeners();
   }
 
@@ -53,5 +51,60 @@ export default class HelpDesk {
     controlPanel.appendChild(ticketList);
 
     this.container.append(controlPanel);
+  }
+
+  loadTickets() {
+    this.ticketService.list((tickets) => {
+      this.tickets = tickets;
+      this.renderTickets();
+    })
+  }
+
+  renderTickets() {
+    const ticketList = this.container.querySelector('.ticket-list');
+
+    this.tickets.forEach((ticket) => {
+      const ticketEl = this.ticketView.render(ticket);
+      ticketList.appendChild(ticketEl);
+      this.addTicketEventListeners(ticketEl, ticket);
+    });
+  }
+
+  addTicketEventListeners(ticketEl, ticket) {
+    const correctTicket = ticketEl.querySelector('.correct-ticket');
+    correctTicket.addEventListener('click', ()=> {
+      this.ticketForm.showModal(ticket, (updatedData) => 
+        this.updateTicket(ticket.id, updatedData),
+      );
+    });
+
+    const deleteTicket = ticketEl.querySelector('.delete-ticket');
+    deleteTicket.addEventListener('click', ()=> {
+      this.deleteTicketForm.showDeleteForm(() => this.deleteTicket(ticket.id));
+    });
+
+    const checkbox = ticketEl.querySelector('.checkbox');
+    checkbox.addEventListener('click', ()=> {
+      this.updateTicket(ticket.id, { status: !ticket.status });
+    });
+  }
+
+  createTicket(data) {
+    this.ticketService.create(data, (newTicket) => {
+      this.tickets.push(newTicket);
+      this.loadTickets();
+    })
+  }
+
+  updateTicket(id, data) {
+    this.ticketService.update(id, data, ()=> {
+      this.loadTickets();
+    });
+  }
+
+  deleteTicket(id) {
+    this.ticketService.delete(id, ()=> {
+      this.loadTickets();
+    });
   }
 }

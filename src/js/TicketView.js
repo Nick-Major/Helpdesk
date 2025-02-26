@@ -31,21 +31,11 @@ export default class TicketView {
 
   addEventListeners() {
     const checkbox = this.ticketEl.querySelector('.checkbox');
-    // const changeTicketBtn = this.ticketEl.querySelector('.correct-ticket');
-    // const deleteTicketBtn = this.ticketEl.querySelector('.delete-ticket');
     const taskDescription = this.ticketEl.querySelector('.task-description');
 
     checkbox.addEventListener('click', () => {
       checkbox.classList.toggle('done');
     });
-
-    // changeTicketBtn.addEventListener('click', () => {
-    //   // должен вызывать форму изменения тикета
-    // });
-
-    // deleteTicketBtn.addEventListener('click', () => {
-    //   // должен вызывать форму удаления тикета
-    // });
 
     this.ticketEl.addEventListener('click', (e) => {
       const isTicketBtn = e.target.classList.contains('ticketBtn');

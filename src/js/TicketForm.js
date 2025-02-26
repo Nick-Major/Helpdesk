@@ -1,9 +1,6 @@
-import { name } from 'file-loader';
+//Класс для создания формы создания нового тикета
 
-/**
- *  Класс для создания формы создания нового тикета
- * */
-export default class TicketForm {
+class TicketForm {
   constructor() {
     this.modal = null;
     this.onSubmit = null;
@@ -15,7 +12,7 @@ export default class TicketForm {
     this.render();
   }
 
-  render(ticket) {
+  render() {
     const controlPanel = document.querySelector('.control-panel');
 
     const modal = document.createElement('form');
@@ -71,6 +68,10 @@ export default class TicketForm {
 
     if (modal) {
       modal.remove();
-    }
+    };
+
+    this.modal = null;
   }
 }
+
+export default TicketForm;
