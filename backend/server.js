@@ -47,6 +47,8 @@ let tickets = [
 
 app.use(async (request, response) => {
   const { method, id } = request.query;
+  console.log('method', method);
+  
   switch (method) {
     case 'allTickets':
       logger.info('All tickets has been called');
@@ -121,14 +123,29 @@ app.use(async (request, response) => {
   }
 });
 
-const port = process.env.PORT || 7070;
+const port = process.env.PORT || 3000;
 
 const bootstrap = async () => {
   try {
     app.listen(port, () => logger.info(`Server has been started on http://localhost:${port}`));
+    console.log('server ok', port);
+    
   } catch (error) {
     console.error(error);
   }
 };
 
 bootstrap();
+
+
+// import express from 'express';
+// const app = express();
+// const port = 7070;
+
+// app.get('/', (req, res) => {
+//   res.send('Hello World!');
+// });
+
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`);
+// });

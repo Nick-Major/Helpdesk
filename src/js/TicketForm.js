@@ -18,15 +18,15 @@ class TicketForm {
     const modal = document.createElement('form');
     modal.classList.add('ticket-form', 'form');
 
-    form.innerHTML = `
+    modal.innerHTML = `
       <h1 class="form-header">${this.ticket === null ? 'Добавить тикет' : 'Изменить тикет'}</h1>
       <div class="short-description description">
         <label for="shortDescription">Краткое описание</label>
-        <input type="text" id="shortDescription" value="${this.ticket ? this.ticket.name : ''}" required>
+        <input class="input-sd" type="text" name="shortDescription" value="${this.ticket ? this.ticket.name : ''}" required>
       </div>
       <div class="detailed-description description">
         <label for="ticketDescription">Подробное описание</label>
-        <textarea id="ticketDescription">${this.ticket ? this.ticket.description : ''}</textarea>
+        <textarea class="input-dd" name="ticketDescription">${this.ticket ? this.ticket.description : ''}</textarea>
       </div>
       <div class="btns-container">
         <button class="cancel-btn btn">Отмена</button>
@@ -35,7 +35,7 @@ class TicketForm {
     `;
 
     this.modal = modal;
-    controlPanel.appendChild(form);
+    controlPanel.appendChild(modal);
 
     this.addModalEventListeners();
   }
@@ -50,8 +50,8 @@ class TicketForm {
   }
 
   handleSubmit() {
-    const shortDescription = this.modal.querySelector('.short-description').value.trim();
-    const detailedDescription = this.modal.querySelector('.detailed-description').value.trim();
+    const shortDescription = this.modal.querySelector('.input-sd').value.trim();
+    const detailedDescription = this.modal.querySelector('.input-dd').value.trim();
 
     if (!shortDescription) {
       alert('Краткое описание обязательно к заполнению!');

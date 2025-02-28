@@ -41,7 +41,11 @@ body {
 }
 
 .ticket-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 95vw;
+    /* height: 80vh; */
     padding: 0 2.5vw 4vh;
 }
 
@@ -55,6 +59,8 @@ body {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    z-index: 1000;
+    background-color: #fff;
     width: 55vw;
     min-width: 176px;
     padding: 10px;
@@ -97,6 +103,7 @@ textarea[name="ticketDescription"]:focus {
 
 .btn {
     border-radius: 5px;
+    min-height: 20px;
     background-color: #fff;
     border: 1px solid #888787f8;
     color: #888787f8;

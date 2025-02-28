@@ -1,10 +1,11 @@
+import { locale } from "core-js";
+
 /**
  *  Класс для отображения тикетов на странице.
  *  Он содержит методы для генерации разметки тикета.
  * */
 export default class TicketView {
   render(ticket) {
-    const ticketList = document.querySelector('.ticket-list');
     this.ticketEl = document.createElement('div');
 
     this.ticketEl.className = 'ticket';
@@ -16,7 +17,7 @@ export default class TicketView {
         <h1 class="ticket-title">${ticket.name}</h1>
     </div>
     <div class="time-and-btns">
-        <time class="time" datetime="YYYY-MM-DDThh:mm">${ticket.created}</time>
+        <time class="time" datetime="YYYY-MM-DDThh:mm">${this.formatDate(ticket.created)}</time>
         <div class="ticket-btns-container">
             <div class="correct-ticket ticketBtn"></div>
             <div class="delete-ticket ticketBtn">X</div>
@@ -24,9 +25,10 @@ export default class TicketView {
     </div>
     <p class="task-description hidden">${ticket.description}</p>
     `;
-    ticketList.append(ticketEl);
 
     this.addEventListeners();
+
+    return this.ticketEl;
   }
 
   addEventListeners() {
@@ -50,5 +52,12 @@ export default class TicketView {
         taskDescription.classList.add('hidden');
       }
     });
+  }
+
+  formatDate(number) {
+    const date = new Date(number);
+    let options = {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', second: '2-digit'};
+    let formattedDate = date.toLocaleString(options).replace(',','');
+    return formattedDate;
   }
 }

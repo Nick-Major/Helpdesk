@@ -19,6 +19,23 @@ export default class HelpDesk {
     this.addEventListeners();
   }
 
+  loadTickets() {
+    this.ticketService.list((tickets) => {
+      this.tickets = tickets;
+      this.renderTickets();
+    })
+  }
+
+  renderTickets() {
+    const ticketList = this.container.querySelector('.ticket-list');
+    ticketList.innerHTML = '';
+    this.tickets.forEach((ticket) => {
+      const ticketEl = this.ticketView.render(ticket);
+      ticketList.append(ticketEl);
+      this.addTicketEventListeners(ticketEl, ticket);
+    });
+  }
+
   addControlPanel() {
     const controlPanel = document.createElement('div');
     controlPanel.classList.add('control-panel');
@@ -53,20 +70,10 @@ export default class HelpDesk {
     this.container.append(controlPanel);
   }
 
-  loadTickets() {
-    this.ticketService.list((tickets) => {
-      this.tickets = tickets;
-      this.renderTickets();
-    })
-  }
-
-  renderTickets() {
-    const ticketList = this.container.querySelector('.ticket-list');
-
-    this.tickets.forEach((ticket) => {
-      const ticketEl = this.ticketView.render(ticket);
-      ticketList.appendChild(ticketEl);
-      this.addTicketEventListeners(ticketEl, ticket);
+  addEventListeners() {
+    const addTicketBtn = this.container.querySelector('.add-ticket-btn');
+    addTicketBtn.addEventListener('click', ()=> {
+      this.ticketForm.showModal(null, (data) => this.createTicket(data));
     });
   }
 

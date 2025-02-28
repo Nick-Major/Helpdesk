@@ -14,6 +14,7 @@ class DeleteTicketForm {
 
     const controlPanel = document.querySelector('.control-panel');
     const modal = document.createElement('form');
+    modal.classList.add('form');
 
     modal.innerHTML = `
             <h1 class="form-header">Удалить тикет</h1>
