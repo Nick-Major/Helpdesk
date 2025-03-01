@@ -1,5 +1,3 @@
-import { locale } from "core-js";
-
 /**
  *  Класс для отображения тикетов на странице.
  *  Он содержит методы для генерации разметки тикета.
@@ -56,8 +54,9 @@ export default class TicketView {
 
   formatDate(number) {
     const date = new Date(number);
-    let options = {year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', second: '2-digit'};
-    let formattedDate = date.toLocaleString(options).replace(',','');
+    const options = { year: '2-digit', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    const locale = 'ru-RU';
+    const formattedDate = date.toLocaleString(locale, options).replace(',', '');
     return formattedDate;
   }
 }

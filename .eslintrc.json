@@ -13,6 +13,7 @@
     "no-plusplus": "off",
     "no-cond-assign": "off",
     "no-underscore-dangle": "off",
+    "default-param-last": "off",
     "no-restricted-syntax": [
       "error",
       "LabeledStatement",

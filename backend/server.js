@@ -48,7 +48,7 @@ let tickets = [
 app.use(async (request, response) => {
   const { method, id } = request.query;
   console.log('method', method);
-  
+
   switch (method) {
     case 'allTickets':
       logger.info('All tickets has been called');
@@ -129,14 +129,12 @@ const bootstrap = async () => {
   try {
     app.listen(port, () => logger.info(`Server has been started on http://localhost:${port}`));
     console.log('server ok', port);
-    
   } catch (error) {
     console.error(error);
   }
 };
 
 bootstrap();
-
 
 // import express from 'express';
 // const app = express();

@@ -30,10 +30,8 @@ class DeleteTicketForm {
     this.modal = modal;
     if (formOpened) {
       return;
-    } else {
-      controlPanel.querySelector('.ticket-list').appendChild(modal);
-    };
-
+    }
+    controlPanel.querySelector('.ticket-list').appendChild(modal);
     this.addModalEventListeners();
   }
 

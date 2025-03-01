@@ -14,6 +14,7 @@ export default [
   {
     rules: {
       "no-unused-vars": "warn",
+      "default-param-last": "off",
     },
   },
   {

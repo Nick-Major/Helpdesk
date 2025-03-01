@@ -1,10 +1,10 @@
-const createRequest = ({ url, method, data }) => {
-  return new Promise((resolve, reject) => {
+const createRequest = ({ url, method, data }) =>
+  new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
 
     // Настройка запроса
     xhr.open(method, url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader('Content-Type', 'application/json');
 
     // Обработка ответа
     xhr.onload = function () {
@@ -18,7 +18,7 @@ const createRequest = ({ url, method, data }) => {
             const response = JSON.parse(xhr.responseText);
             resolve(response);
           } catch (error) {
-            reject(new Error("Ошибка при парсинге JSON"));
+            reject(new Error('Ошибка при парсинге JSON'));
           }
         }
       } else {
@@ -29,8 +29,8 @@ const createRequest = ({ url, method, data }) => {
 
     // Обработка ошибок сети
     xhr.onerror = function () {
-      console.error(`Ошибка сети: ${xhr.statusText || "Запрос не может быть выполнен"}`);
-      reject(new Error(`Ошибка сети: ${xhr.statusText || "Запрос не может быть выполнен"}`));
+      console.error(`Ошибка сети: ${xhr.statusText || 'Запрос не может быть выполнен'}`);
+      reject(new Error(`Ошибка сети: ${xhr.statusText || 'Запрос не может быть выполнен'}`));
     };
 
     // Отправка данных (если они есть)
@@ -40,6 +40,5 @@ const createRequest = ({ url, method, data }) => {
       xhr.send();
     }
   });
-};
 
 export default createRequest;

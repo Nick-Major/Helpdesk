@@ -1,4 +1,4 @@
-//Класс для создания формы создания нового тикета
+// Класс для создания формы создания нового тикета
 
 class TicketForm {
   constructor() {
@@ -23,7 +23,9 @@ class TicketForm {
       <h1 class="form-header">${this.ticket === null ? 'Добавить тикет' : 'Изменить тикет'}</h1>
       <div class="short-description description">
         <label for="shortDescription">Краткое описание</label>
-        <input class="input-sd" type="text" name="shortDescription" value="${this.ticket ? this.ticket.name : ''}" required>
+        <input class="input-sd" type="text" name="shortDescription" value="${
+          this.ticket ? this.ticket.name : ''
+        }" required>
       </div>
       <div class="detailed-description description">
         <label for="ticketDescription">Подробное описание</label>
@@ -38,13 +40,10 @@ class TicketForm {
     this.modal = modal;
 
     if (formOpened) {
-      return
-    } else {
-      controlPanel.querySelector('.ticket-list').appendChild(modal);
-    };
-
+      return;
+    }
+    controlPanel.querySelector('.ticket-list').appendChild(modal);
     this.addModalEventListeners();
-    if(formOpened) return;
   }
 
   addModalEventListeners() {
@@ -75,7 +74,7 @@ class TicketForm {
 
     if (modal) {
       modal.remove();
-    };
+    }
 
     this.modal = null;
   }
