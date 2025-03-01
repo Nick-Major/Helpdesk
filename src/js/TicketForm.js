@@ -14,6 +14,7 @@ class TicketForm {
 
   render() {
     const controlPanel = document.querySelector('.control-panel');
+    const formOpened = controlPanel.querySelector('form');
 
     const modal = document.createElement('form');
     modal.classList.add('ticket-form', 'form');
@@ -35,9 +36,15 @@ class TicketForm {
     `;
 
     this.modal = modal;
-    controlPanel.appendChild(modal);
+
+    if (formOpened) {
+      return
+    } else {
+      controlPanel.querySelector('.ticket-list').appendChild(modal);
+    };
 
     this.addModalEventListeners();
+    if(formOpened) return;
   }
 
   addModalEventListeners() {

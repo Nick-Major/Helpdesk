@@ -16,6 +16,8 @@ class DeleteTicketForm {
     const modal = document.createElement('form');
     modal.classList.add('form');
 
+    const formOpened = controlPanel.querySelector('.form');
+
     modal.innerHTML = `
             <h1 class="form-header">Удалить тикет</h1>
             <p class="operation-description">Вы уверены, что хотите удалить тикет? Это действие необратимо.</p>
@@ -26,7 +28,11 @@ class DeleteTicketForm {
         `;
 
     this.modal = modal;
-    controlPanel.appendChild(modal);
+    if (formOpened) {
+      return;
+    } else {
+      controlPanel.querySelector('.ticket-list').appendChild(modal);
+    };
 
     this.addModalEventListeners();
   }

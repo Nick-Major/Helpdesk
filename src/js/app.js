@@ -6,7 +6,7 @@ import DeleteTicketForm from './DeleteTicketForm';
 
 const root = document.getElementById('root');
 
-const ticketService = new TicketService('http://localhost:3000');
+const ticketService = new TicketService('http://localhost:4000');
 const ticketView = new TicketView();
 const ticketForm = new TicketForm();
 const deleteTicketForm = new DeleteTicketForm();

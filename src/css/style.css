@@ -42,11 +42,11 @@ body {
 
 .ticket-list {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: center;
     width: 95vw;
-    /* height: 80vh; */
-    padding: 0 2.5vw 4vh;
+    padding: 2.5vw;
 }
 
 #root {
